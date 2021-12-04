@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Modules\Membership\Member;
+use App\Models\Survey;
 
 class User extends \TCG\Voyager\Models\User
 {
@@ -47,5 +48,11 @@ class User extends \TCG\Voyager\Models\User
     public function membership()
     {
         return $this->hasOne(Member::class);
+    }
+
+
+    public function submissions()
+    {
+        return $this->hasMany(Survey::class, 'user_id', 'id');
     }
 }

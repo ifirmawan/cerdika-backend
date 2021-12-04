@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'cerdika', 'namespace' => 'App\Http\Controllers\API'], function(){
+    Route::get('/', 'CerdikaApiController@index')->name('api.cerdika.index');
+    Route::get('questions', 'CerdikaApiController@questions')->name('api.cerdika.questions');
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::post('survey', 'CerdikaApiController@survey')->name('api.cerdika.survey');
+    });
+});
